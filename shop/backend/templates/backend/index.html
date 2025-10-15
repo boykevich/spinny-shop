@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h2 class="page-title">{{ title|capfirst }}</h2>
+
+<ul>
+    {% for post in posts %}
+    {% if post.is_published %}
+    <li>
+        <h2>{{ post.name }}</h2>
+        <p>{{ post.description }}</p>
+        <p>{{ post.price }} {{ 'CZK' }}</p>
+        <p><a href="{{ post.get_absolute_url }}">Read the post</a></p>
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
