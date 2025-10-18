@@ -76,13 +76,13 @@ class Status(models.TextChoices):
     IN_PROCESS = "in process"
 
 class Order(models.Model):
-    client_id = models.ForeignKey(Client, on_delete=models.CASCADE)
-    bicycle_id = models.ForeignKey(Bicycle, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    bicycle = models.ForeignKey(Bicycle, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=Status.choices)
 
     def __str__(self):
-        return f"Order Id: {self.pk}. {self.client_id} - {self.bicycle_id}"
+        return f"Order Id: {self.pk}. {self.client} - {self.bicycle}"
 
 class OrderedItem(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
